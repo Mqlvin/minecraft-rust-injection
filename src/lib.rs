@@ -1,8 +1,11 @@
 use std::{ptr::{null, null_mut}, thread::{self, sleep}, time::Duration};
 use jni_simple::{JNI_VERSION_1_8, JavaVMAttachArgs};
+use windows::Win32::System::SystemServices::{DLL_PROCESS_DETACH, DLL_PROCESS_ATTACH};
 
 mod jvm_util;
 
+
+#[cfg(target_os = "linux")]
 // run library_init when library loaded
 #[used]
 #[cfg_attr(target_os="linux", unsafe(link_section = ".init_array"))]
@@ -10,11 +13,26 @@ static INIT: unsafe extern "C" fn() = library_init;
 
 
 // entry point for library
+#[cfg(target_os = "linux")]
 #[unsafe(no_mangle)]
 unsafe extern "C" fn library_init() {
     thread::spawn(|| {
         attach();
     });
+}
+
+#[cfg(target_os = "windows")]
+#[unsafe(no_mangle)]
+#[allow(non_snake_case)]
+fn DllMain(_: usize, dw_reason: u32, _: usize) -> i32 {
+    match dw_reason {
+        DLL_PROCESS_ATTACH => {
+            attach()
+        },
+        _ => ()
+    }
+
+    1
 }
 
 

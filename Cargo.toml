@@ -8,3 +8,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 jni-simple = { version = "0.3.2", features = ["asserts", "dynlink", "libloading", "loadjvm"] }
+windows = { version = "0.62.2", features = ["Win32_System_SystemServices"] }
