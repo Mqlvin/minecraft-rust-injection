@@ -1,5 +1,7 @@
 use std::{ptr::{null, null_mut}, thread::{self, sleep}, time::Duration};
 use jni_simple::{JNI_VERSION_1_8, JavaVMAttachArgs};
+
+#[cfg(target_os = "windows")]
 use windows::Win32::System::SystemServices::{DLL_PROCESS_DETACH, DLL_PROCESS_ATTACH};
 
 mod jvm_util;
