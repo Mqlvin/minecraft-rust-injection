@@ -1,0 +1,10 @@
+[package]
+name = "rust-mc-client"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+jni-simple = { version = "0.3.2", features = ["asserts", "dynlink", "libloading", "loadjvm"] }
