@@ -1,4 +1,4 @@
-# Rust-Minecraft Client
+# Rust-Minecraft Client (cross-platform)
 This proof-of-concept demonstrates using Rust with `jni-simple` to load a native shared libray into the Minecraft JVM, and modify in-game values at runtime.
 This technique is commonly used in C++ based Minecraft "injection clients", which provide a DLL or EXE injected into the game to add cheats.
 
